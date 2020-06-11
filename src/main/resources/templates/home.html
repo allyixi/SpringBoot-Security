@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Spring Security Example</title>
+</head>
+<body>
+<h1>Welcome!</h1>
+
+<p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
+<div sec:authorize="isAuthenticated()"> 认证通过才能看到这句话
+    登陆的名字<span sec:authentication="name"></span>
+    登陆的角色<span sec:authorize="hasRole('ROLE_vip')">vip</span><span sec:authorize ="hasRole('ROLE_USER')">user</span>
+</div>
+<div sec:authorize="!isAuthenticated()"> 没有进过认证才能看到这句话</div>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="注销"/>
+</form>
+</body>
+</html>
